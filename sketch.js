@@ -60,15 +60,22 @@ function setup() {
 //////////////////////////////////////////////////////////////////////////////////////////////////////// Wie kann ich die Daten aus dem HTML Dokument speichern?
 // ------------------ 1: USER INPUT IN VARIABEL SPEICHERN ------------------
 
-let userForm = document.getElementById('userForm');
-let userFeeling = document.getElementById('userFeeling');
-let userOrigin = document.getElementById('userOrigin');
+let url = window.location.href; 
+let data = url.split('?')[1]; 
+let splitData = data.split('&'); 
+let userFeeling = splitData[0].split('=')[1]; 
+let userOrigin = splitData[1].split('=')[1]; 
+
+console.log(userFeeling, userOrigin); 
+
+// let userForm = document.getElementById('userForm');
+// let userFeeling = document.getElementById('userFeeling');
+// let userOrigin = document.getElementById('userOrigin');
 
 
 // Platzhalter:
 // let userFeeling = 'glücklich';
 // let userOrigin = 'Berlin';
-console.log(userForm, userFeeling, userOrigin);
 
 
 
@@ -225,37 +232,37 @@ emotionsSachsenAnhalt = ['glücklich', 'traurig', 'traurig', 'froh', 'happy', 'h
 emotionsSchleswigHoltstein = ['glücklich', 'traurig', 'traurig', 'froh', 'gelangweilt', 'glücklich', 'traurig', 'müde', 'glücklich', 'müde', 'müde', 'gelangweilt', 'traurig', 'gelangweilt', 'traurig'];
 emotionsThueringen = ['glücklich', 'traurig', 'traurig', 'froh', 'gelangweilt', 'froh', 'froh', 'froh', 'froh', 'müde', 'müde', 'froh', 'froh', 'traurig', 'traurig'];
 
-if(userOrigin === 'Baden Württemberg'){
+if(userOrigin === 'baden-wuerttemberg'){
   emotionsBadenWuerttemberg.push(userFeeling);
-}else if(userOrigin === 'Bayern'){
+}else if(userOrigin === 'bayern'){
   emotionsBayern.push(userFeeling);
-}else if(userOrigin === 'Berlin'){
+}else if(userOrigin === 'berlin'){
   emotionsBerlin.push(userFeeling);
-}else if(userOrigin === 'Brandenburg'){
+}else if(userOrigin === 'brandenburg'){
   emotionsBrandenburg.push(userFeeling);
-}else if(userOrigin === 'Bremen'){
+}else if(userOrigin === 'bremen'){
   emotionsBremen.push(userFeeling);
-}else if(userOrigin === 'Hamburg'){
+}else if(userOrigin === 'hamburg'){
   emotionsHamburg.push(userFeeling);
-}else if(userOrigin === 'Hessen'){
+}else if(userOrigin === 'hessen'){
   emotionsHessen.push(userFeeling);
-}else if(userOrigin === 'Mecklenburg-Vorpommen'){
+}else if(userOrigin === 'mecklenburg-vorpommen'){
   emotionsMecklenburgVorpommen.push(userFeeling);
-}else if(userOrigin === 'Niedersachsen'){
+}else if(userOrigin === 'niedersachsen'){
   emotionsNiedersachsen.push(userFeeling);
-}else if(userOrigin === 'Nordrhein Westfalen'){
+}else if(userOrigin === 'nordrhein-westfalen'){
   emotionsNRW.push(userFeeling);
-}else if(userOrigin === 'Rheinland-Pfalz'){
+}else if(userOrigin === 'rheinland-pfalz'){
   emotionsRheinlandPfalz.push(userFeeling);
-}else if(userOrigin === 'Saarland'){
+}else if(userOrigin === 'saarland'){
   emotionsSaarland.push(userFeeling);
-}else if(userOrigin === 'Sachsen'){
+}else if(userOrigin === 'sachsen'){
   emotionsSachsen.push(userFeeling);
-}else if(userOrigin === 'Sachsen-Anhalt'){
+}else if(userOrigin === 'sachsen-anhalt'){
   emotionsSachsenAnhalt.push(userFeeling);
-}else if(userOrigin === 'Schleswig-Holstein'){
+}else if(userOrigin === 'schlesweig-holtstein'){
   emotionsSchleswigHoltstein.push(userFeeling);
-}else if(userOrigin === 'Thüringen'){
+}else if(userOrigin === 'thueringen'){
   emotionsThueringen.push(userFeeling);
 }
 
@@ -667,6 +674,8 @@ function mousePressed(){
       console.log(alleLaender[i]);
       alleLaender[i].isClicked = true;
       ausgewaehlt = true;
+    }else{
+      alleLaender[i].isClicked = false; 
     }
   }
 }
