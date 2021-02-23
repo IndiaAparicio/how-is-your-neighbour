@@ -2,40 +2,22 @@ let boxHeight = 10;
 let myFont;
 let angle = 0;
 let alleLaender = [];
-let userFeeling;
-let userOrigin;
 let canvas;
 
 function preload(){
-  beispiel_map = loadImage('./img/Deutschlandkarte-beispiel-raster.png');
   myFont = loadFont('./img/Raleway/static/Raleway-Medium.ttf');
 }
-
-
-function userZeug(){
-  let userForm = document.getElementById("userForm").value;
-  alert(userForm);
-}
-
-
 
 
 
 function setup() {
 
-// let userForm = document.getElementById("userForm");
-// userFeeling.onsubmit = function(){
-//   alert(userForm);
-// }
-
-// userFeeling = prompt("Wie fühlst du dich heute?", "<dein Gefühl>");
-
 canvas = createCanvas(windowWidth, windowHeight, WEBGL);
 canvas.position(0,0,0);
 canvas.style('z-index', '-1');
-  // camera = createCamera();
-  // setCamera(camera);
-  // strokeWeight(6);
+
+sizedX = windowWidth;
+sizedY = windowHeight;
 
 //Schleswig-Holtstein 
 let v1 = createVector(-90, -350, 0); //oben
@@ -190,7 +172,7 @@ alleLaender = [
 }
 
 function draw() {
-background(100,170,160);
+background(30,70,100);
 
 
 
@@ -205,17 +187,17 @@ pointLight(50, 50, 50, locX, locY, 100); //erster wert für intensität, wenn ei
 ambientMaterial(150,100,100);
 rotateY(angle*0.1);
 
-mx = map(mouseX, 0, width, 0, 0);
-my = map(mouseY, 0, width, 0, 0);
-
+push();
+  noStroke();
+  fill(30,70,100);
+  translate(0,0,-200);
+  rect(-sizedX/2,-sizedY/2,sizedX,sizedY);
+pop();
 
 ///////// BEWEGUNG DEUTSCHLAND MAP
 
 rY = map(mouseX,0,width, 1,-1);
 rX = map(mouseY,0, height, -0.3, 0.3);
-
-
-
 
 rotateY(rY);
 rotateX(rX);
@@ -229,9 +211,6 @@ for(let i = 0; i < alleLaender.length; i++){
   pop();
 }
 
-///////// SHAPES MALEN
-
-
 }
 
 
@@ -240,9 +219,9 @@ for(let i = 0; i < alleLaender.length; i++){
 class Bundesland {
   constructor(arr, sphereX, sphereY, sphereZ, text){
     this.arr = arr;
-    this.col_r = 150;
-    this.col_g = 250;
-    this.col_b = 250;
+    this.col_r = 40;
+    this.col_g = 70;
+    this.col_b = 100;
     this.sphereX = sphereX;
     this.sphereY = sphereY;
     this.sphereZ = sphereZ;
@@ -253,9 +232,8 @@ class Bundesland {
 
   display(){
     noStroke();
-    stroke(50,100,100);
-    strokeWeight(6);
-    //fill(col_r, col_g, col_b)
+    stroke(0);
+    strokeWeight(2);
     translate(0,0,this.z);
     ambientMaterial(this.col_r, this.col_g, this.col_b);
     beginShape();
@@ -265,50 +243,8 @@ class Bundesland {
     endShape(CLOSE);
   }
 
-  showSphere(){
-    push();
-    noStroke();
-    translate(this.sphereX, this.sphereY, this.sphereZ);
-
-
-    fill(this.c);
-    box(10);
-   
-    //wegen WEBGL muss man die mouse erstmal richtig mappen weil es nicht bei 0 beginnt
-    let x2 = map(mouseX,0, width, -width/2, width/2);
-    let y2 = map(mouseY, 0, height, -height/2, height/2);
-
-    let d = dist(this.sphereX, this.sphereY, x2, y2);
-
-    if(d < 20){
-      this.c.setGreen(0);
-      textSize(32);
-      textFont(myFont);
-      push();
-      translate(0,0,200);
-      text(this.text, 10, 30);
-      this.col_r = 255;
-      if(this.z < 100){
-        this.z += 1;
-      }
-      pop();
-    }else{
-      this.c.setGreen(255);
-      this.col_r = 150;
-      this.z = 0;
-    }
-    pop();
   
-  }
-
 
 
 }
 
-function startScreen(){
-  //bg
-  //input gefühl
-  //auswahlmöglichkeiten von Gefühlen
-  //auswahl Bundesland 
-  //weiter
-}

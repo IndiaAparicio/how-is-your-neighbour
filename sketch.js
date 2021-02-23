@@ -47,6 +47,15 @@ let ausgewaehlt = false;
 let smoothEffect1 = 15;
 
 let monthlyValue = [];
+const today = new Date();
+let checkDate;
+let checkMonth;
+let monthlyUpdate = false;
+
+
+let newArray = [];
+
+
 
 
 
@@ -212,9 +221,14 @@ arr_rheinlandP = [v37, v36, v35, v34 ,v33, v60, v61, v62, v63, v55];
 
 
 
+
+
+
+
+
 // ------------------ 3: USER INPUT IN ARRAY SPEICHERN (eigentlich Datenbank) ------------------
 
-//USER ANTWORTEN ZU ARRAYS HINZUFÜGEN
+//USER ANTWORTEN ZU ARRAYS HINZUFÜGEN --> Diese Arrays müssten in einer Datenbank gespeichert werden
 emotionsBadenWuerttemberg = ['glücklich', 'traurig', 'traurig', 'froh', 'gelangweilt', 'glücklich', 'traurig', 'müde', 'glücklich', 'müde', 'müde', 'traurig', 'traurig', 'traurig', 'traurig'];
 emotionsBayern = ['wütend', 'wütend', 'traurig', 'froh', 'gelangweilt', 'gelangweilt', 'lustig', 'müde', 'müse', 'müde', 'müde', 'traurig', 'wütend'];
 emotionsBerlin = ['gelangweilt', 'traurig', 'froh', 'froh'];
@@ -232,39 +246,10 @@ emotionsSachsenAnhalt = ['glücklich', 'traurig', 'traurig', 'froh', 'happy', 'h
 emotionsSchleswigHoltstein = ['glücklich', 'traurig', 'traurig', 'froh', 'gelangweilt', 'glücklich', 'traurig', 'müde', 'glücklich', 'müde', 'müde', 'gelangweilt', 'traurig', 'gelangweilt', 'traurig'];
 emotionsThueringen = ['glücklich', 'traurig', 'traurig', 'froh', 'gelangweilt', 'froh', 'froh', 'froh', 'froh', 'müde', 'müde', 'froh', 'froh', 'traurig', 'traurig'];
 
-if(userOrigin === 'baden-wuerttemberg'){
-  emotionsBadenWuerttemberg.push(userFeeling);
-}else if(userOrigin === 'bayern'){
-  emotionsBayern.push(userFeeling);
-}else if(userOrigin === 'berlin'){
-  emotionsBerlin.push(userFeeling);
-}else if(userOrigin === 'brandenburg'){
-  emotionsBrandenburg.push(userFeeling);
-}else if(userOrigin === 'bremen'){
-  emotionsBremen.push(userFeeling);
-}else if(userOrigin === 'hamburg'){
-  emotionsHamburg.push(userFeeling);
-}else if(userOrigin === 'hessen'){
-  emotionsHessen.push(userFeeling);
-}else if(userOrigin === 'mecklenburg-vorpommen'){
-  emotionsMecklenburgVorpommen.push(userFeeling);
-}else if(userOrigin === 'niedersachsen'){
-  emotionsNiedersachsen.push(userFeeling);
-}else if(userOrigin === 'nordrhein-westfalen'){
-  emotionsNRW.push(userFeeling);
-}else if(userOrigin === 'rheinland-pfalz'){
-  emotionsRheinlandPfalz.push(userFeeling);
-}else if(userOrigin === 'saarland'){
-  emotionsSaarland.push(userFeeling);
-}else if(userOrigin === 'sachsen'){
-  emotionsSachsen.push(userFeeling);
-}else if(userOrigin === 'sachsen-anhalt'){
-  emotionsSachsenAnhalt.push(userFeeling);
-}else if(userOrigin === 'schlesweig-holtstein'){
-  emotionsSchleswigHoltstein.push(userFeeling);
-}else if(userOrigin === 'thueringen'){
-  emotionsThueringen.push(userFeeling);
-}
+
+
+
+
 
 
 
@@ -317,11 +302,98 @@ alleLaender = [
 
 
 
+// 3.1 IM ERSTEN IM MONAT ARRAYS ERNEUERN UND ALTE SPEICHERN 
+
+//wenn 1. im monat speicher die Arrays in... und clear die arrays
+
+checkDate = today.getDate();
+if (checkDate === 1 && !monthlyUpdate){
+  monthlyUpdate = true; //damit nur einmal alles gelöscht wird!
+
+  for(let i = 0; i < alleLaender.length; i++){
+    alleLaender[i].saveMonthlyValues();
+  }
+
+  //Das muss hier gelöscht und neu zugeordnet werden, da sonst der im neuen Objekt (oben) definierte Array verwendet wird. Aber es muss hier nach der Erstellung des Objekts erfolgen, sodass die Daten erstmal gespeichert werden können
+  emotionsBadenWuerttemberg = [];
+  badenW.allEmotions = emotionsBadenWuerttemberg;
+  emotionsBayern = [];
+  bayern.allEmotions = emotionsBayern;
+  emotionsBerlin = [];
+  berlin.allEmotions = emotionsBerlin;
+  emotionsBrandenburg = [];
+  brandenburg.allEmotions = emotionsBrandenburg;
+  emotionsBremen = [];
+  bremen.allEmotions = emotionsBremen;
+  emotionsHamburg = [];
+  hamburg.allEmotions = emotionsHamburg;
+  emotionsHessen = [];
+  hessen.allEmotions = emotionsHessen;
+  emotionsMecklenburgVorpommen = [];
+  mecklenburg.allEmotions = emotionsMecklenburgVorpommen;
+  emotionsNiedersachsen = [];
+  niedersachsen.allEmotions = emotionsNiedersachsen;
+  emotionsNRW = [];
+  nrw.allEmotions = emotionsNRW;
+  emotionsRheinlandPfalz = [];
+  rheinlandP.allEmotions = emotionsRheinlandPfalz;
+  emotionsSaarland = [];
+  saarland.allEmotions = emotionsSaarland;
+  emotionsSachsen = [];
+  sachsen.allEmotions = emotionsSachsen;
+  emotionsSachsenAnhalt = [];
+  sachsenAnhalt.allEmotions = emotionsSachsenAnhalt;
+  emotionsSchleswigHoltstein = [];
+  schleswigHoltstein.allEmotions = emotionsSchleswigHoltstein;
+  emotionsThueringen = [];
+  thueringen.allEmotions = emotionsThueringen;
+}
+if(checkDate === 2){
+  monthlyUpdate = false; //wieder zurück setzen 
+}
+
+
+if(userOrigin === 'baden-wuerttemberg'){
+  emotionsBadenWuerttemberg.push(userFeeling);
+}else if(userOrigin === 'bayern'){
+  emotionsBayern.push(userFeeling);
+}else if(userOrigin === 'berlin'){
+  emotionsBerlin.push(userFeeling);
+}else if(userOrigin === 'brandenburg'){
+  emotionsBrandenburg.push(userFeeling);
+}else if(userOrigin === 'bremen'){
+  emotionsBremen.push(userFeeling);
+}else if(userOrigin === 'hamburg'){
+  emotionsHamburg.push(userFeeling);
+}else if(userOrigin === 'hessen'){
+  emotionsHessen.push(userFeeling);
+}else if(userOrigin === 'mecklenburg-vorpommen'){
+  emotionsMecklenburgVorpommen.push(userFeeling);
+}else if(userOrigin === 'niedersachsen'){
+  emotionsNiedersachsen.push(userFeeling);
+}else if(userOrigin === 'nordrhein-westfalen'){
+  emotionsNRW.push(userFeeling);
+}else if(userOrigin === 'rheinland-pfalz'){
+  emotionsRheinlandPfalz.push(userFeeling);
+}else if(userOrigin === 'saarland'){
+  emotionsSaarland.push(userFeeling);
+}else if(userOrigin === 'sachsen'){
+  emotionsSachsen.push(userFeeling);
+}else if(userOrigin === 'sachsen-anhalt'){
+  emotionsSachsenAnhalt.push(userFeeling);
+}else if(userOrigin === 'schlesweig-holtstein'){
+  emotionsSchleswigHoltstein.push(userFeeling);
+}else if(userOrigin === 'thueringen'){
+  emotionsThueringen.push(userFeeling);
+}
+
+console.log(emotionsBerlin)
 
 // ------------------ 6: BELIEBTESTE EMOTIONEN AUSRECHNEN ------------------
 
   for(let i = 0; i < alleLaender.length; i++){
     alleLaender[i].findingHighestEmotion();
+    alleLaender[i].calculateTimeline();
   }
 
 
@@ -413,6 +485,7 @@ class Bundesland {
     this.emotionHigh = '';
     this.emotionMid = '';
     this.emotionLow = '';
+    this.emotionHighMonthly = ['noData','noData','noData','noData','noData','noData','noData','noData','noData','noData','noData','noData',];
     this.arr = arr;
     this.col_r = 210;
     this.col_g = 245;
@@ -428,7 +501,71 @@ class Bundesland {
     this.highestNumberEmotion = 0;
     this.middleNumberEmotion = 0;
     this.lowestNumberEmotion = 0;
+    this.jan = [];
+    this.feb = [];
+    this.mar = [];
+    this.apr = [];
+    this.may = [];
+    this.june = [];
+    this.july = [];
+    this.aug = [];
+    this.sept = [];
+    this.oct = [];
+    this.nov = [];
+    this.dec = [];
   }
+
+
+
+  saveMonthlyValues(){
+     //speicher neuen Array in emotionsBundeslandMonth
+    checkMonth = today.getMonth();
+
+    if(checkMonth === 0){
+      this.jan = this.allEmotions.slice(0);
+    }else if(checkMonth === 1){
+      this.feb = this.allEmotions.slice(0);
+    }else if(checkMonth === 2){
+      this.mar = this.allEmotions.slice(0);
+    }else if(checkMonth === 3){
+      this.apr = this.allEmotions.slice(0);
+    }else if(checkMonth === 4){
+      this.may = this.allEmotions.slice(0);
+    }else if(checkMonth === 5){
+      this.june = this.allEmotions.slice(0);
+    }else if(checkMonth === 6){
+      this.july = this.allEmotions.slice(0);
+    }else if(checkMonth === 7){
+      this.aug = this.allEmotions.slice(0);
+    }else if(checkMonth === 8){
+      this.sept = this.allEmotions.slice(0);
+    }else if(checkMonth === 9){
+      this.oct = this.allEmotions.slice(0);
+    }else if(checkMonth === 10){
+      this.nov = this.allEmotions.slice(0);
+    }else if(checkMonth === 11){
+      this.dec = this.allEmotions.slice(0);
+
+    }
+    
+    this.allEmotions = [];
+    console.log('feb: ' + this.feb + 'mar: '+ this.mar);
+
+  }
+
+  calculateTimeline(){
+    //müsste in Datenbank gespeichert werden
+    checkMonth = today.getMonth();
+    console.log(checkMonth);
+
+    for(let i = 0; i < this.emotionHighMonthly.length; i++){
+      if(checkMonth === i){
+        this.emotionHighMonthly[i] = this.emotionHigh; 
+      }
+    }
+    console.log(this.emotionHighMonthly);
+  }
+
 
   findingHighestEmotion(){
     //den Array ordnen
@@ -444,7 +581,7 @@ class Bundesland {
     for (let i = 0; i < this.allEmotions.length; i++) {
       if (this.allEmotions[i] != current) {
           if (cnt > 0) {
-              console.log(current + ' comes --> ' + cnt + ' times');
+              //console.log(current + ' comes --> ' + cnt + ' times');
               emotions.push(current);
               cntEmotions.push(cnt);
           }
@@ -455,27 +592,27 @@ class Bundesland {
       }
     }
     if (cnt > 0) {
-      console.log(current + ' comes --> ' + cnt + ' times');
+      //console.log(current + ' comes --> ' + cnt + ' times');
       //IRGENDWIE MUSS DAS ZWEI MAL PASSIEREN,weil das letzte sonst fehlt
       emotions.push(current);
       cntEmotions.push(cnt);
     }
 
-    console.log(emotions); //array mit den emotions zusammengefasst
-    console.log(cntEmotions); //array mit dem counter an index mit passender emotions[]
+    //console.log(emotions); //array mit den emotions zusammengefasst
+    //console.log(cntEmotions); //array mit dem counter an index mit passender emotions[]
 
     //jetzt habe ich den höchsten Wert
     //https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Math/max
     this.highestNumberEmotion = Math.max(...cntEmotions);
-    console.log(this.highestNumberEmotion);
+    //console.log(this.highestNumberEmotion);
 
     //der höchste Wert befindet sich an Stelle whereHighestNumber
     //https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
     let whereHighestNumber = cntEmotions.indexOf(this.highestNumberEmotion);
-    console.log(whereHighestNumber);
+    //console.log(whereHighestNumber);
     
     this.emotionHigh = emotions[whereHighestNumber];
-    console.log(this.emotionHigh +' ist in '+ this.text +'am stärksten');
+    //console.log(this.emotionHigh +' ist in '+ this.text +'am stärksten');
     //////////////////////////////////////////////////////////////////////////////////////////////////////// Wie kann ich den zweiten und dritten Wert speichern?
 
     //setze cntEmotions an Stelle höchster Wert auf 0
@@ -484,17 +621,19 @@ class Bundesland {
     this.middleNumberEmotion = Math.max(...cntEmotions);
     let whereMiddleNumber = cntEmotions.indexOf(this.middleNumberEmotion);
     this.emotionMid = emotions[whereMiddleNumber];
-    console.log(this.emotionMid +' ist in '+ this.text + ' mittel stark');
+    //console.log(this.emotionMid +' ist in '+ this.text + ' mittel stark');
 
     let MidZahl = whereMiddleNumber;
     cntEmotions[MidZahl] = 0;
     this.lowestNumberEmotion = Math.max(...cntEmotions);
     let whereLowestNumber = cntEmotions.indexOf(this.lowestNumberEmotion);
     this.emotionLow = emotions[whereLowestNumber];
-    console.log(this.emotionLow +' ist in '+ this.text +'mittel schwach');
+    //console.log(this.emotionLow +' ist in '+ this.text +'mittel schwach');
     
-    console.log(cntEmotions);
+    //console.log(cntEmotions);
   }
+
+
 
 
   display(){
@@ -537,7 +676,7 @@ class Bundesland {
       this.c.setGreen(255);
       this.c.setRed(255);
       this.c.setBlue(255);
-      textSize(32);
+      textSize(windowWidth/30);
       textFont(myFontBold);
       push();
       translate(0,0,200);
@@ -574,35 +713,29 @@ class Bundesland {
       push();
         translate(-windowWidth/12,0,200);
         noStroke();
-        textSize(20);
+        textSize(windowWidth/50);
         textFont(myFontBold);
 
         //highestNumber als höchsten Wert im dritten Argument, weil die anderen dann auch in Relation zur highest Numer angezeigt werden
-        let my1 = map(this.highestNumberEmotion,0,this.highestNumberEmotion,20,windowHeight/4.5);
-        let my2 = map(this.middleNumberEmotion,0,this.highestNumberEmotion,20,windowHeight/4.5); 
-        let my3 = map(this.lowestNumberEmotion,0,this.highestNumberEmotion,20,windowHeight/4.5); 
+        let my1 = map(this.highestNumberEmotion,0,this.highestNumberEmotion,40,windowHeight/4.5);
+        let my2 = map(this.middleNumberEmotion,0,this.highestNumberEmotion,40,windowHeight/4.5); 
+        let my3 = map(this.lowestNumberEmotion,0,this.highestNumberEmotion,40,windowHeight/4.5); 
 
         fill(0);
-        text('In ' + this.text + ' sind die Menschen:',-windowWidth/3, -windowHeight/3.5);
+        text('In ' + this.text + ' sind die Menschen:',-windowWidth/3, -windowHeight/3);
 
-        textSize(14);
-        rect(-windowWidth/3,-20,windowWidth/20,-my1);
-        text(this.emotionHigh, -windowWidth/3, 0);
+        textSize(windowHeight/50);
+        rect(-windowWidth/3,-45,windowWidth/20,-my1);
+        text(this.emotionHigh, -windowWidth/3, -20);
 
         fill(50,70,80);
-        rect(-windowWidth/3 + windowWidth/15,-20,windowWidth/20,-my2);
-        text(this.emotionMid, -windowWidth/3 + windowWidth/15, 0);
+        rect(-windowWidth/3 + windowWidth/15,-45,windowWidth/20,-my2);
+        text(this.emotionMid, -windowWidth/3 + windowWidth/15, -20);
 
         fill(80,110,120);
-        rect(-windowWidth/3 + windowWidth/7.5,-20,windowWidth/20,-my3);
-        text(this.emotionLow, -windowWidth/3 + windowWidth/7.5, 0);
+        rect(-windowWidth/3 + windowWidth/7.5,-45,windowWidth/20,-my3);
+        text(this.emotionLow, -windowWidth/3 + windowWidth/7.5, -20);
 
-      
-        //this.isClicked = thisIsClicked;
-        
-        //setTimeout(function(){ thisIsClicked = false; }, 2000);
-      
-        //console.log(this.isClicked);
       pop();
     }
     
@@ -614,12 +747,28 @@ class Bundesland {
     if(this.isClicked){
       push();
       //wegen der camera
-      translate(-windowWidth/12,0,200);
+      translate(-windowWidth/12,-30,200);
 
-        textSize(10);
+        textSize(windowHeight/70);
         textFont(myFontBold);
         fill(0);
-        text('Die Menschen in '+ this.text +' fühlten sich in den letzten 12 Monaten so ' + this.emotionHigh, -windowWidth/3, windowHeight/3.5 + 20);
+        text('Die Menschen in '+ this.text +' fühlten sich in den letzten 12 Monaten so "' + this.emotionHigh + '".', -windowWidth/3, windowHeight/3.5 + 20);
+        textFont(myFont);
+        textSize(windowWidth/300 * windowHeight/300);
+        text('Die beliebtesten Emotionen der letzten 12 Monate waren: Jan.: ' + this.emotionHighMonthly[0] +
+        '. | Feb.: '+this.emotionHighMonthly[1]+
+        '. | Mar.: '+this.emotionHighMonthly[2]+
+        '. | Apr.: '+this.emotionHighMonthly[3]+ 
+        '. | \nMai: '+this.emotionHighMonthly[4]+
+        '. | Jun.: '+this.emotionHighMonthly[5]+
+        '. | Jul.: '+this.emotionHighMonthly[6]+
+        '. | Aug.: '+this.emotionHighMonthly[7]+
+        '. | Sep.: '+this.emotionHighMonthly[8]+
+        '. | Okt.: '+this.emotionHighMonthly[9]+
+        '. | Nov.: '+this.emotionHighMonthly[10]+
+        '. | Dez.: '+this.emotionHighMonthly[11]
+        , -windowWidth/3, windowHeight/3.5 + 60);
+
 
     
 
@@ -671,7 +820,7 @@ function mousePressed(){
   //////////////////////////////////////////////////////////////////////////////////////////////////////// Wie kann ich es hinkriegen, dass die alten Ergebnisse nicht mehr angezeigt werden, sobald die neuen gezeigt werden sollen?
   for(let i = 0; i < alleLaender.length; i++){
     if(alleLaender[i].d < 30){
-      console.log(alleLaender[i]);
+      //console.log(alleLaender[i]);
       alleLaender[i].isClicked = true;
       ausgewaehlt = true;
     }else{

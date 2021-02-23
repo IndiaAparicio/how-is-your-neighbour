@@ -11,7 +11,8 @@ html, body {
 }
 
 canvas {
-  display: block;
+  
+  position: fixed;
 }
 
 h1 {
@@ -23,12 +24,13 @@ h1 {
   font-weight: 900;
   font-style: bold;
   word-spacing: 20px;
-  color: rgb(233, 249, 248)
+  color: rgb(233, 249, 248);
 }
 
 
 h2{
   font-size: 5em;
+  color: rgb(194, 255, 245);
   font-weight: 900;
   font-style: bold;
   z-index: 2;
@@ -37,9 +39,14 @@ h2{
 }
 
 h3{
+  color: rgb(194, 255, 245);
   font-size: 1.5rem;
   text-transform: uppercase;
   letter-spacing: 0.2rem;
+}
+
+p{
+  color: rgb(132, 182, 189);
 }
 
 .form-complete {
