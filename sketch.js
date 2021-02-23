@@ -789,6 +789,7 @@ class Bundesland {
         //Graph
         
         //hier könnten prozentuale Werte gespeichert werden
+        //das canvas fest machen
         //////////////////////////////////////////////////////////////////////////////////////////////////////// Wo soll ich die Ergebnisse der letzen Monate speichern?
         let monat = [13,90,29,40,10,9,30,86,85,47,45,23];
         

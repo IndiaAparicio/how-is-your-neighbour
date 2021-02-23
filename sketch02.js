@@ -12,8 +12,7 @@ function preload(){
 
 function setup() {
 
-canvas = createCanvas(windowWidth, windowHeight, WEBGL);
-canvas.position(0,0,0);
+canvas = createCanvas(window.innerWidth, window.innerHeight, WEBGL);
 canvas.style('z-index', '-1');
 
 sizedX = windowWidth;
@@ -172,9 +171,13 @@ alleLaender = [
 }
 
 function draw() {
-background(30,70,100);
+  
 
+console.log(window.pageYOffset)
+canvas.position(0,0+window.pageYOffset,0);
+background(194, 245, 255);
 
+let scrollAmount = window.pageYOffset*0.3;
 
 /////////LICHTER
 lights();
@@ -184,15 +187,16 @@ let locX = mouseX - width / 2;
 let locY = mouseY - height / 2;
 pointLight(50, 50, 50, locX, locY, 100); //erster wert für intensität, wenn eine farbe ausgewählt wird wird nur die farbe im material heler
 
-ambientMaterial(150,100,100);
+ambientMaterial(194, 245, 255);
 rotateY(angle*0.1);
 
 push();
   noStroke();
-  fill(30,70,100);
+  fill(194-scrollAmount, 245-scrollAmount, 255-scrollAmount);
   translate(0,0,-200);
   rect(-sizedX/2,-sizedY/2,sizedX,sizedY);
 pop();
+
 
 ///////// BEWEGUNG DEUTSCHLAND MAP
 
@@ -208,6 +212,12 @@ stroke(0);
 for(let i = 0; i < alleLaender.length; i++){
   push();
   alleLaender[i].display();
+  alleLaender[i].col_r = 194;
+  alleLaender[i].col_r -=scrollAmount;
+  alleLaender[i].col_g = 245;
+  alleLaender[i].col_g -=scrollAmount;
+  alleLaender[i].col_b = 255;
+  alleLaender[i].col_b -=scrollAmount;
   pop();
 }
 
@@ -219,9 +229,9 @@ for(let i = 0; i < alleLaender.length; i++){
 class Bundesland {
   constructor(arr, sphereX, sphereY, sphereZ, text){
     this.arr = arr;
-    this.col_r = 40;
-    this.col_g = 70;
-    this.col_b = 100;
+    this.col_r = 194; 
+    this.col_g = 245;
+    this.col_b = 255;
     this.sphereX = sphereX;
     this.sphereY = sphereY;
     this.sphereZ = sphereZ;
@@ -246,5 +256,8 @@ class Bundesland {
   
 
 
+}
+function windowResized(){
+  resizeCanvas(window.innerWidth, window.innerHeight);
 }
 

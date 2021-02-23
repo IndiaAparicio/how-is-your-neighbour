@@ -9,8 +9,8 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com"> 
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;700;900&display=swap" rel="stylesheet">
-
+    
+    <script src="https://kit.fontawesome.com/069b370d78.js" crossorigin="anonymous"></script>
     <script src="libraries/p5.min.js"></script>
     <script src="libraries/p5.sound.min.js"></script>
   </head>
@@ -20,56 +20,61 @@
 
       <!--<h1>How is your neighbour?</h1>-->
       <h2>How is your neighbour?</h2>
-      <form action="/map.html" method="get" class="form-complete" id="userForm">
+      <a href='#questions'><i class="fas fa-angle-double-down"></i></a>
+      <div class="wrapper1">
+          
+        <form action="/map.html" method="get" class="form-complete" id="userForm">
 
-        <div class="form-container">
-          <label for="userFeeling"><h3>How are you feeling?</h3> </label>
-          <p>Beschreibe mit einem Wort, wie du dich heute fühlst oder wähle eins aus.</p>
-          <input type="text" class="user-input" name="userFeeling" id="userFeeling" list="suggestions" required>
-          <datalist id="suggestions">
-            <option value="Gluecklich">
-            <option value="Traurig">
-            <option value="Wuetend">
-            <option value="Aengstlich">
-            <option value="Muede">
-            <option value="Gestresst">
-            <option value="Gelangweilt">
-            <option value="Gelassen">
-            <option value="Neutral">
-          </datalist>
-        </div>
-  
-        <div class="form-container">
-          <label for="userOrigin"><h3>Where are you from?</h3> </label>
-          <p>Aus welchem Bundesland kommst du?</p>
-          <select class="user-input" name="userOrigin" id="userOrigin" required>
-            <option value="" disabled selected></option>
-            <option value="baden-wuerttemberg">Baden Württemberg</option>
-            <option value="bayern">Bayern</option>
-            <option value="berlin">Berlin</option>
-            <option value="brandenburg">Brandenburg</option>
-            <option value="bremen">Bremen</option>
-            <option value="hamburg">Hamburg</option>
-            <option value="hessen">Hessen</option>
-            <option value="mecklenburg-vorpommen">Mecklenburg-Vorpommen</option>
-            <option value="niedersachsen">Niedersachsen</option>
-            <option value="nordrhein-westfalen">Nordrhein Westfalen</option>
-            <option value="rheinland-pfalz">Rheinland-Pfalz</option>
-            <option value="saarland">Saarland</option>
-            <option value="sachsen">Sachsen</option>
-            <option value="sachsen-anhalt">Sachsen-Anhalt</option>
-            <option value="schlesweig-holtstein">Schleswig-Holstein</option>
-            <option value="thueringen">Thüringen</option>
-          </select>
-        </div>
+          <div class="form-container" id='questions'>
+            <label for="userFeeling"><h3>How are you feeling?</h3> </label>
+            <p>Beschreibe mit einem Wort, wie du dich heute fühlst oder wähle eins aus.</p>
+            <input type="text" class="user-input" name="userFeeling" id="userFeeling" list="suggestions" required>
+            <datalist id="suggestions">
+              <option value="Gluecklich">
+              <option value="Traurig">
+              <option value="Wuetend">
+              <option value="Aengstlich">
+              <option value="Muede">
+              <option value="Gestresst">
+              <option value="Gelangweilt">
+              <option value="Gelassen">
+              <option value="Neutral">
+            </datalist>
+          </div>
+    
+          <div class="form-container">
+            <label for="userOrigin"><h3>Where are you from?</h3> </label>
+            <p>Aus welchem Bundesland kommst du?</p>
+            <select class="user-input" name="userOrigin" id="userOrigin" required>
+              <option value="" disabled selected></option>
+              <option value="baden-wuerttemberg">Baden Württemberg</option>
+              <option value="bayern">Bayern</option>
+              <option value="berlin">Berlin</option>
+              <option value="brandenburg">Brandenburg</option>
+              <option value="bremen">Bremen</option>
+              <option value="hamburg">Hamburg</option>
+              <option value="hessen">Hessen</option>
+              <option value="mecklenburg-vorpommen">Mecklenburg-Vorpommen</option>
+              <option value="niedersachsen">Niedersachsen</option>
+              <option value="nordrhein-westfalen">Nordrhein Westfalen</option>
+              <option value="rheinland-pfalz">Rheinland-Pfalz</option>
+              <option value="saarland">Saarland</option>
+              <option value="sachsen">Sachsen</option>
+              <option value="sachsen-anhalt">Sachsen-Anhalt</option>
+              <option value="schlesweig-holtstein">Schleswig-Holstein</option>
+              <option value="thueringen">Thüringen</option>
+            </select>
+          </div>
 
-        <div class="submit-container"></div>
-          <input class="submit-button" type="submit" value="Continue!" oncklick="userZeug()">
-        </div>
+          <div class="submit-container"></div>
+            <input class="submit-button" type="submit" value="Continue!" oncklick="userZeug()">
+          </div>
 
-      
+        
 
-      </form>
+        </form>
+
+    </div>
 
 
       <script src="sketch02.js"></script>
